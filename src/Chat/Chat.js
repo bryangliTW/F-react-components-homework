@@ -5,6 +5,7 @@ import ChatBox from './ChatBox/ChatBox';
 import ChatInput from './ChatInput/ChatInput';
 import shopData from '../data/shop.json';
 import answersData from '../data/answers.json';
+import { ROLE } from '../constants';
 
 class Chat extends Component {
   constructor(props, context) {
@@ -31,12 +32,12 @@ class Chat extends Component {
     let { messages } = this.state;
     const userMsg = {
       text: message,
-      role: 'customer',
+      role: ROLE.CUSTOMER,
     };
     const autoResponse = answersData.find((answer) =>
       answer.tags.find((tag) => message.includes(tag))
     );
-    messages = messages.concat(userMsg, autoResponse);
+    messages = autoResponse ? messages.concat(userMsg, autoResponse) : messages.concat(userMsg);
     this.setState({ messages });
   };
 
