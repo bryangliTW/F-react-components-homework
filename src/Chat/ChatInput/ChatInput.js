@@ -14,8 +14,10 @@ class ChatInput extends Component {
   };
 
   sendMessage = (message) => {
-    this.props.sendMessage(message);
-    this.setState({ message: '' });
+    if (message) {
+      this.props.sendMessage(message);
+      this.setState({ message: '' });
+    }
   };
 
   keyPress = (event) => {
